@@ -1,67 +1,50 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import EmployeeDetails from './EmployeeDetails';
 import Grid from './Grid';
-
+import ShowCounter from './ShowCounter'
 class App extends React.Component {
   constructor(props) {
     super(props);
     // Don't call this.setState() here!
-    this.counter= 0 ;
-    this.employeeName= 'Phani';
-    this.handleClick = this.handleClick.bind(this);
+    this.counter= 1 ;    
+    this.name="test";
+    this.handleClickMain = this.handleClickMain.bind(this);
   }
 
-  // componentWillMount(){
-  //  // alert("componentWillMount");
-  //  }
-
-  componentDidMount(){
-      //alert("componentDidMount");
+  handleClickMain(nm){   
+  this.setState({counter: 1 });
+  this.setState({name : nm});
   }
-  //componentDidUpdate(prevProps, prevState, snapshot)
-  componentDidUpdate(prevProps, prevState){
-    //alert("componentDidupdate");
-    }
-  
-    // shouldComponentUpdate(nextProps, nextState){
-    //   if(this.counter>4){
-    //     return false;
-    //   }  
-    //   return true;   
-    // }
 
-  handleClick(){
-  this.setState({counter: this.counter++});
-  this.setState(
-    {employeeName : 'Ramesh'} );
+shouldComponentUpdate(nextProps, nextState){
+  if( this.counter>4) {
+  return false;
   }
+  else {
+    return true;
+  }
+}
+
 
   render() {
-    //alert("render");
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <EmployeeDetails data="Passing data from parent"></EmployeeDetails>
-            {this.employeeName}
+      <>
+        <div className="App">
+           <header className="App-header">
+         <img src={logo} className="App-logo" alt="logo" />             
+        
           <p>
-            Edit <code>src/App.js</code> This is for learning.
-          </p>
-          {this.counter}
-          <button onClick={this.handleClick}>click on me</button>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a> 
-          <Grid tableName="Salary Details  " counter ={this.counter} ></Grid>      
+            {/* Edit <code>src/App.js</code> This is for learning. */}
+            {this.name}
+          </p>        
+          <ShowCounter handleClick={this.handleClickMain} counter={this.counter}></ShowCounter>         
         </header>
-      </div>
+       </div>
+        <div>
+          <p>second div</p>
+        </div>
+      </>
     );
   }
 }
